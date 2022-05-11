@@ -27,3 +27,54 @@ SELECT species, AVG(escape_attempts) FROM animals WHERE date_of_birth BETWEEN '1
 -- species |        avg         
 -- ---------+--------------------
 --  pokemon | 3.0000000000000000
+
+SELECT A1.name, A1.owner_id FROM animals A1 WHERE A1.owner_id = 4;
+--     name    | owner_id 
+-- ------------+----------
+--  Blossom    |        4
+--  Charmander |        4
+--  Squirtle   |        4
+
+SELECT animals.name, species.name FROM animals JOIN species ON animals.species_id = species.id WHERE species.name = 'Pokemon';
+--    name    |  name   
+-- ------------+---------
+--  Pikachu    | Pokemon
+--  Blossom    | Pokemon
+--  Charmander | Pokemon
+--  Squirtle   | Pokemon
+--  Ditto      | Pokemon
+SELECT owners.full_name, animals.name FROM owners LEFT OUTER JOIN animals ON owners.id = animals.owner_id;
+--     full_name    |    name    
+-- -----------------+------------
+--  Sam Smith       | Agumon
+--  Jennifer Orwell | Gabumon
+--  Jennifer Orwell | Pikachu
+--  Bob             | Plantmon
+--  Bob             | Devimon
+--  Melody Pond     | Squirtle
+--  Melody Pond     | Charmander
+--  Melody Pond     | Blossom
+--  Dean Winchester | Angemon
+--  Dean Winchester | Boarmon
+--  Jodie Whittaker | 
+SELECT species.name, COUNT(animals.name) FROM animals RIGHT JOIN species ON animals.species_id = species.id GROUP BY species.name;
+--   name   | count 
+-- ---------+-------
+--  Pokemon |     5
+--  Digimon |     6
+SELECT animals.name, species.name FROM animals INNER JOIN species ON animals.species_id=species.id WHERE animals.owner_id = 2 AND animals.species_id = 2;
+--   name   |  name   
+-- ---------+---------
+--  Gabumon | Digimon
+SELECT owners.full_name, animals.name, animals.escape_attempts FROM owners LEFT JOIN animals ON owners.id = animals.owner_id WHERE owners.full_name = 'Dean Winchester' AND animals.escape_attempts = 0;
+--  full_name | name | escape_attempts 
+-- -----------+------+-----------------
+SELECT owners.full_name, COUNT(animals.name) FROM owners JOIN animals ON owners.id = animals.owner_id GROUP BY owners.full_name ORDER BY COUNT DESC;
+--     full_name    | count 
+-- -----------------+-------
+--  Melody Pond     |     3
+--  Dean Winchester |     2
+--  Bob             |     2
+--  Jennifer Orwell |     2
+--  Sam Smith       |     1
+
