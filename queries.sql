@@ -78,3 +78,81 @@ SELECT owners.full_name, COUNT(animals.name) FROM owners JOIN animals ON owners.
 --  Jennifer Orwell |     2
 --  Sam Smith       |     1
 
+SELECT animals.name, visits.visit_date FROM animals INNER JOIN visits ON animals.id = visits.animal_id WHERE visits.vet_id = 1 ORDER BY visits.visit_date DESC;
+--    name   | visit_date 
+-- ----------+------------
+--  Blossom  | 2021-01-11
+--  Plantmon | 2020-08-10
+--  Agumon   | 2020-05-24
+SELECT COUNT(animal_id) FROM visits WHERE vet_id = 3;
+--  count 
+-- -------
+--      4
+SELECT vets.name, specializations.species_id FROM vets LEFT JOIN specializations ON vets.id = specializations.vet_id;
+--        name       | species_id 
+-- ------------------+------------
+--  William Tatcher  |          1
+--  Stephanie Mendez |          2
+--  Stephanie Mendez |          1
+--  Jack Harkness    |          2
+--  Maisy Smith      |           
+SELECT animals.name, visits.visit_date FROM animals JOIN visits ON animals.id = visits.animal_id WHERE visits.vet_id = 3 AND visits.visit_date BETWEEN '2020-04-01' AND '2020-08-30';
+--   name   | visit_date 
+-- ---------+------------
+--  Agumon  | 2020-07-22
+--  Blossom | 2020-05-24
+SELECT animals.name, COUNT(visits.animal_id) FROM animals LEFT JOIN visits ON animals.id = visits.animal_id GROUP BY animals.name ORDER BY COUNT DESC;
+--     name    | count 
+-- ------------+-------
+--  Boarmon    |     4
+--  Plantmon   |     3
+--  Pikachu    |     3
+--  Blossom    |     2
+--  Agumon     |     2
+--  Angemon    |     2
+--  Devimon    |     1
+--  Charmander |     1
+--  Squirtle   |     1
+--  Gabumon    |     1
+--  Ditto      |     0
+SELECT animals.name, visits.visit_date FROM animals INNER JOIN visits ON animals.id = visits.animal_id WHERE visits.vet_id = 2 ORDER BY visits.visit_date ASC;
+--    name   | visit_date 
+-- ----------+------------
+--  Boarmon  | 2019-01-24
+--  Boarmon  | 2019-05-15
+--  Plantmon | 2019-12-21
+--  Pikachu  | 2020-01-05
+--  Boarmon  | 2020-02-27
+--  Pikachu  | 2020-03-08
+--  Pikachu  | 2020-05-14
+--  Boarmon  | 2020-08-03
+--  Plantmon | 2021-04-07
+SELECT * FROM visits ORDER BY visit_date DESC;
+--  animal_id | vet_id | visit_date 
+-- -----------+--------+------------
+--          4 |      3 | 2021-05-04
+--          6 |      2 | 2021-04-07
+--          5 |      4 | 2021-02-24
+--          2 |      4 | 2021-02-02
+--         10 |      1 | 2021-01-11
+--          8 |      4 | 2020-11-04
+--          8 |      4 | 2020-10-03
+--          6 |      1 | 2020-08-10
+--          9 |      2 | 2020-08-03
+--          1 |      3 | 2020-07-22
+--          1 |      1 | 2020-05-24
+--         10 |      3 | 2020-05-24
+--          3 |      2 | 2020-05-14
+--          3 |      2 | 2020-03-08
+--          9 |      2 | 2020-02-27
+--          3 |      2 | 2020-01-05
+--          6 |      2 | 2019-12-21
+--          7 |      3 | 2019-09-29
+--          9 |      2 | 2019-05-15
+--          9 |      2 | 2019-01-24
+SELECT vets.name, COUNT(vets.name) AS num_of_visits FROM vets LEFT JOIN specializations ON vets.id = specializations.vet_id JOIN visits ON vets.id = visits.vet_id WHERE specializations.species_id IS NULL GROUP BY vets.name ORDER BY COUNT(vets.name) DESC;
+
+SELECT species.name AS expected_specialty FROM animals JOIN visits ON animals.id = visits.animal_id JOIN vets ON vets.id = visits.vet_id JOIN species ON species.id = animals.species_id WHERE vets.name = 'Maisy Smith' GROUP BY species.name ORDER BY COUNT(DISTINCT animals.name) DESC LIMIT 1;
+--  expected_specialty 
+-- --------------------
+--  Digimon
