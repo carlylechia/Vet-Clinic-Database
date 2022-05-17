@@ -2,6 +2,10 @@
 
 > Database for a vet clinic with data about the animals.
 
+## Schema Diagram
+
+![schema](vet_clinic_schema_diagram.png)
+
 ## Getting Started
 
 This repository includes files with plain SQL that can be used to recreate a database:
