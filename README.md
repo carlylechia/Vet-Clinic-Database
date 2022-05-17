@@ -19,6 +19,11 @@ This repository includes files with plain SQL that can be used to recreate a dat
 - Twitter: [@chiacarlyle](https://twitter.com/chiacarlyle)
 - LinkedIn: [chia-carlyle](https://linkedin.com/in/chia-carlyle)
 
+👤 **Author2**
+
+- GitHub: [@ Bahadur](https://github.com/samiullahbahadur)
+- Twitter: [@Bahadur](https://twitter.com/Samiull88496331)
+- LinkedIn: [Bahadur](https://www.linkedin.com/in/jsivahera/)
 
 ## 🤝 Contributing
 
