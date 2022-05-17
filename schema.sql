@@ -20,3 +20,9 @@ CREATE TABLE visits(animal_id integer, vet_id integer, visit_date date, FOREIGN 
 
 -- Add an email column to your owners table
 ALTER TABLE owners ADD COLUMN email VARCHAR(120);
+-- Add an index on the animal_id culumn in the visits table to optimize performance.
+CREATE INDEX idx_animal_id ON visits(animal_id);
+-- Add an index on the vet_id culumn in the visits table to optimize performance.
+CREATE INDEX idx_vet_id_asc ON visits (vet_id ASC);
+-- Add an index on the email culumn in the owners table to optimize performance.
+CREATE INDEX idx_email ON owners (email);

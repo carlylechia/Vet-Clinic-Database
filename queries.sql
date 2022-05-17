@@ -175,7 +175,6 @@ explain analyze SELECT COUNT(*) FROM visits where animal_id = 4;
 --                      Rows Removed by Filter: 4792380
 --  Planning Time: 0.070 ms
 --  Execution Time: 1003.925 ms
-CREATE INDEX idx_animal_id ON visits(animal_id);
 ANALYZE;
 explain analyze SELECT COUNT(*) FROM visits where animal_id = 4;
 -- Finalize Aggregate  (cost=24255.56..24255.56 rows=1 width=8) (actual time=118.215..119.605 rows=1 loops=1)
@@ -194,7 +193,6 @@ EXPLAIN ANALYZE SELECT * FROM visits where vet_id = 2;
 --    Rows Removed by Filter: 11861135
 --  Planning Time: 0.101 ms
 --  Execution Time: 1463.933 ms
-CREATE INDEX idx_vet_id_asc ON visits (vet_id ASC);
 ANALYZE;
 EXPLAIN ANALYZE SELECT * FROM visits WHERE vet_id = 2;
 -- Finalize Aggregate  (cost=63890.91..63890.92 rows=1 width=8) (actual time=314.925..318.087 rows=1 loops=1)
@@ -216,7 +214,6 @@ EXPLAIN ANALYZE SELECT * FROM owners where email = 'owner_18327@mail.com';
 --          Rows Removed by Filter: 3333334
 --  Planning Time: 2.373 ms
 --  Execution Time: 3144.978 ms
-CREATE INDEX idx_email ON owners (email);
 EXPLAIN ANALYZE SELECT * FROM owners where email = 'owner_18327@mail.com';
 -- Index Scan using idx_email on owners  (cost=0.43..20.44 rows=4 width=43) (actual time=2.942..2.997 rows=4 loops=1)
 --    Index Cond: ((email)::text = 'owner_18327@mail.com'::text)
